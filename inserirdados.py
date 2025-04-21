@@ -231,7 +231,7 @@ def inserir_dados(aba, empresa):
         dados = entrada.split(" ")
         if len(dados) == 5:
             # Adiciona empresa e troca hífens por espaço
-            dados_formatados = [empresa] + [campo.replace("-", " ") for campo in dados]
+            dados_formatados = [empresa] + [campo.replace("-", " ").replace(",", " ") for campo in dados]
             dados_lista.append(dados_formatados)
             print(f"Dados armazenados temporariamente ({len(dados_lista)} registros). Pressione Enter para mais dados ou digite 'sair' para gravar na planilha e ir aos próximos dados.")
         else:
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         planilha = conectar_planilha()
         while True:  # Adicionado loop principal
             empresa_input = input("Nome da empresa: (use '-' para espaços): ").strip()
-            empresa = empresa_input.replace("-", " ")
+            empresa = empresa_input.replace("-", " ").replace(",", " ")
             aba_selecionada = verificar_ou_criar_aba(planilha, empresa)
             if aba_selecionada:
                 inserir_dados(aba_selecionada, empresa)
